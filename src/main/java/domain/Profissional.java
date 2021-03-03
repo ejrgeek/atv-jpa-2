@@ -1,9 +1,18 @@
 package domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
 public class Profissional implements Serializable {
@@ -13,38 +22,4 @@ public class Profissional implements Serializable {
     private Long id;
 
     private String nome;
-
-    @ManyToOne
-    private Time time;
-
-    public Profissional() {}
-
-    public Profissional(String nome, Time time) {
-        this.nome = nome;
-        this.time = time;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
 }
