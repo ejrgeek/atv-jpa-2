@@ -1,9 +1,6 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @ToString
 public class Time implements Serializable {
 
@@ -22,17 +20,19 @@ public class Time implements Serializable {
 
     private String nome;
 
-    @OneToMany(mappedBy = "equipe")
-    private List<Profissional> profissionals;
+    @OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
+    private List<Jogador> jogadores;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Tecnico tecnico;
 
     @ManyToMany
-    @JoinTable(name = 'equipe_campeonato',
+    @JoinTable(name = "time_campeonato",
     joinColumns = {
             @JoinColumn(name = "equipe_id")
     },
     inverseJoinColumns = {
-            @JoinColumn(name = 'campeonato_id')
+            @JoinColumn(name = "campeonato_id")
     })
-
     private List<Campeonato> campeonatos;
 }

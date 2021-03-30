@@ -1,31 +1,30 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @ToString
 public class Campeonato implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "campeonatos", cascade = CascadeType.ALL)
     private List<Time> times;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate dataInicio, dataFim;
+    private Calendar dataInicio, dataFim;
 
 }

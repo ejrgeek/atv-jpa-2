@@ -12,6 +12,20 @@ public class BaseDao<T> {
         em.getTransaction().begin();
         em.merge(object);
         em.getTransaction().commit();
+        //em.close();
+    }
+
+    public T findBtId(Class<T> cls, Long id){
+        em.getTransaction().begin();
+        T obj = em.find(cls, id);
+        em.close();
+        return obj;
+    }
+
+    public void delete(T object){
+        em.getTransaction().begin();
+        em.remove(object);
+        em.getTransaction().commit();
         em.close();
     }
 }

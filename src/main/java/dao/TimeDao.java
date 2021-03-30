@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DaoTime extends BaseDao<Time> {
+public class TimeDao extends BaseDao<Time> {
 
     public Time buscarPorNomeTime(Class<Time> cls, String nome){
         em.getTransaction().begin();
